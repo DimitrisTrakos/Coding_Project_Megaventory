@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <title>Coding Project</title>
+          <script>
+         var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "https://firebasestorage.googleapis.com/v0/b/gorgias-templates-production.appspot.com/o/attachments%2F3291ead6-82a2-43fa-ba6e-58328b4e02a1.json?alt=media&token=56fbe45a-2b91-4e35-bd1a-69f41f7d4363",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+
+           var orders=response.mvPurchaseOrders;
+           
+           buildList(orders);
+
+           function buildList(data){
+               var list=document.getElementById('myList')
+                   var row = `<li><a href="information.html">${data[0].PurchaseOrderTypeAbbreviation}-${data[0].PurchaseOrderNo}</a></li>
+                              <li><a href="information2.html">${data[1].PurchaseOrderTypeAbbreviation}-${data[1].PurchaseOrderNo}</a></li>
+                                <li><a href="information3.html">${data[2].PurchaseOrderTypeAbbreviation}-${data[2].PurchaseOrderNo}</a></li>
+                                `
+                   list.innerHTML +=row 
+                
+           }
+         });
+         </script>
+        </head>
+        <body> 
+        <h1> Orders</h1>
+          <ul>
+          <h2> <div id="myList"></div></h2>
+          </ul>
+        </body>
+        
+<html>

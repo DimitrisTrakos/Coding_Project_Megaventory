@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <title>Inforamtion about first order</title>
+          <script>
+         var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "https://firebasestorage.googleapis.com/v0/b/gorgias-templates-production.appspot.com/o/attachments%2F3291ead6-82a2-43fa-ba6e-58328b4e02a1.json?alt=media&token=56fbe45a-2b91-4e35-bd1a-69f41f7d4363",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+           
+           var adr=response.mvPurchaseOrders[2].PurchaseOrderAddress;
+           $("#address").append(adr);
+
+           var contPer=response.mvPurchaseOrders[2].PurchaseOrderContactPerson;
+           $("#person").append(contPer);
+
+           var status=response.mvPurchaseOrders[2].PurchaseOrderStatus;
+           $("#stat").append(status); 
+
+           var details=response.mvPurchaseOrders[2].PurchaseOrderDetails;
+
+           buildTable(details);
+
+           function buildTable(data){
+               var table=document.getElementById('myTable')
+
+               for (var i =0; i< data.length; i++){
+                   var row =`<tr>
+                                <td>${data[i].PurchaseOrderRowProductSKU}</td>
+                                <td>${data[i].PurchaseOrderRowQuantity}</td>
+                                <td>${data[i].PurchaseOrderRowUnitPriceWithoutTaxOrDiscount}</td>
+                                <td>${data[i].PurchaseOrderRowTotalAmount}</td>
+                                </tr>`
+                    table.innerHTML +=row            
+               }
+           }
+        
+
+
+         
+         });
+         </script>
+    </head>
+    <body> 
+     <h1>Informations about Order</h1>
+    <div id="address"> PurchaseOrderAddress: </div>
+    <br><br>
+    <div id="person">PurchaseOrderContactPerson : </div>
+    <br><br>
+    <div id="stat">PurchaseOrderStatus : </div>
+    <br><br>
+    
+    <table>
+        <tr class="bg-info">
+            <th>Product SKU</th>
+            <th>Quantity Ordered</th>
+            <th>Unit Price</th>
+            <th>Total Amount</th>
+        </tr>
+
+        <tbody id="myTable">
+
+    </table>
+
+
+    </body>
+
+    
+    
+    
+    
+<html>
